@@ -1,25 +1,11 @@
-@extends('layouts.app')
+<div>
+    <div>
+        <h1>Search city</h1>
+        <form action="{{ route('search.city') }}"  class="form-inline my-2 my-lg-0" method="post">
+            @csrf
+            <input class="form-control mr-sm-2" name="search" type="search" placeholder="Search" aria-label="Search" required>
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>
+    </div>
 
-@section('content')
-
-    <h1> {{ $forecast->city->name }},{{ $forecast->city->country}}</h1>
-    <section>
-        <div class="row">
-            @foreach($forecast->list as $value)
-                <div class="card-deck">
-                    <div class="card">
-                        <img src="http://openweathermap.org/img/w/{{ $value->weather[0]->icon . ".png" }}" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">{{ $value->dt_txt }}</h5>
-                            <p class="card-text">{{ $value->weather[0]->description }}</p>
-                            <p class="card-text">Temp Max: {{ $value->main->temp_max }}&deg;C</p>
-                            <p class="card-text">Temp Min: {{ $value->main->temp_min }}&deg;C</p>
-
-                        </div>
-                    </div>
-                </div>
-            @endforeach
-        </div>
-    </section>
-
-@endsection
+</div>

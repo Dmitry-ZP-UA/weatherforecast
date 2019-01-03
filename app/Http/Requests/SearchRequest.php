@@ -24,7 +24,7 @@ class SearchRequest extends FormRequest
     public function rules()
     {
         return [
-
+            'search' => 'required|alpha_dash|max:255'
         ];
     }
 }
