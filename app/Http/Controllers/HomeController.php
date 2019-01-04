@@ -8,7 +8,6 @@ use App\Services\WeatherService;
 
 class HomeController extends Controller
 {
-    const HOST_ELASTIC = ['elasticsearch:9200'];
 
     /**
      * @var CitySearcher
