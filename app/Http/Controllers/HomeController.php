@@ -3,30 +3,35 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\SearchRequest;
+use App\Services\CitySearcher;
+use App\Services\WeatherService;
 
 class HomeController extends Controller
 {
 
     /**
+     * @var CitySearcher
+     */
+    private $search;
+
+    /**
      * HomeController constructor.
      */
-    public function __construct()
+    public function __construct(CitySearcher $search)
     {
-
+        $this->search = $search;
     }
 
     /**
      * @param SearchRequest $request
+     * @param WeatherService $forecast
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function search(SearchRequest $request)
+    public function search(SearchRequest $request, WeatherService $forecast)
     {
-        $url = 'https://api.openweathermap.org/data/2.5/forecast?q='.$request->search.',ua&units=metric&APPID='.env('OPEN_WEATHER_MAP_API_KEY');
+        $forecast = $forecast->getForecast($request->cityName);
 
-        $contents = file_get_contents($url);
-        $forecast=json_decode($contents);
-
-        return view('forecast',['name_city' => $request->search,'forecast' => $forecast]);
+        return view('forecast',['forecast' => $forecast]);
     }
 
     /**

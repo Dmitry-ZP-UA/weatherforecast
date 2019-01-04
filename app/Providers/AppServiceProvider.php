@@ -2,10 +2,14 @@
 
 namespace App\Providers;
 
+use App\Services\Elastic;
 use Illuminate\Support\ServiceProvider;
+use Elasticsearch\ClientBuilder;
 
 class AppServiceProvider extends ServiceProvider
 {
+    const HOST_ELASTIC = ['elasticsearch:9200'];
+
     /**
      * Bootstrap any application services.
      *
@@ -23,6 +27,12 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        $this->app->bind(Elastic::class, function ($app) {
+            return new Elastic(
+                ClientBuilder::create()
+                    ->setHosts(self::HOST_ELASTIC)
+                    ->build()
+            );
+        });
     }
 }
