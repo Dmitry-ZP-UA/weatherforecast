@@ -40,6 +40,7 @@ class FillingElastic extends Command
     public function handle()
     {
         $path = storage_path() . "/test.json";
+
         $json = json_decode(file_get_contents($path), true);
         $client = ClientBuilder::create()->setHosts(self::HOST_ELASTIC)->build();
 

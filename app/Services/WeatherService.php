@@ -26,19 +26,19 @@ class WeatherService
     }
 
     /**
-     * @param $cityName
+     * @param $cityId
      * @return mixed
      */
-    public function getForecast($cityName)
+    public function getForecast($cityId)
     {
-        if(($this->cache->getCache($cityName))){
-            return $this->cache->getCache($cityName);
+        if(($this->cache->getCache($cityId))){
+            return $this->cache->getCache($cityId);
         }
 
-        $cityId = $this->searcher->getCityIdByName($cityName);
         $url = 'https://api.openweathermap.org/data/2.5/forecast?id='.$cityId.'&units=metric&APPID='.env('OPEN_WEATHER_MAP_API_KEY');
         $contents = file_get_contents($url);
-        $this->cache->setCache($cityName, $contents);
+
+        $this->cache->setCache($cityId, $contents);
 
         return json_decode($contents);
     }
