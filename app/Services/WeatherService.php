@@ -31,8 +31,8 @@ class WeatherService
      */
     public function getForecast($cityId)
     {
-        if(($this->cache->getCache($cityId))){
-            return $this->cache->getCache($cityId);
+        if(($cache = $this->cache->getCache($cityId))){
+            return $cache;
         }
 
         $url = 'https://api.openweathermap.org/data/2.5/forecast?id='.$cityId.'&units=metric&APPID='.env('OPEN_WEATHER_MAP_API_KEY');
