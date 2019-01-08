@@ -3,22 +3,16 @@
 @section('content')
 
     <h1> {{ $forecast->city->name }},{{ $forecast->city->country}}</h1>
-    <section>
-        <div class="row">
+    <div style="padding-top: 30px">
             @foreach($forecast->list as $value)
-                <div class="card-deck">
-                    <div class="card">
-                        <img src="http://openweathermap.org/img/w/{{ $value->weather[0]->icon . ".png" }}" class="card-img-top" alt="...">
-                        <div class="card-body">
+                        <div style="display: flex">
                             <h5 class="card-title">{{ $value->dt_txt }}</h5>
-                            <p class="card-text">{{ $value->weather[0]->description }}</p>
+                            <img src="http://openweathermap.org/img/w/{{ $value->weather[0]->icon . ".png" }}" style="height: 50px; width: 50px">
                             <p class="card-text">Temp Max: {{ $value->main->temp_max }}&deg;C</p>
                             <p class="card-text">Temp Min: {{ $value->main->temp_min }}&deg;C</p>
                         </div>
-                    </div>
-                </div>
+
             @endforeach
-        </div>
-    </section>
+    </div>
 
 @endsection

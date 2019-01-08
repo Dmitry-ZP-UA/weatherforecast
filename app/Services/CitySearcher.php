@@ -38,15 +38,23 @@ class CitySearcher
     public function elasticSearch($data)
     {
         $query = [
-            'match' => [
-                'name' => $data
-            ]
+            'multi_match' => [
+                'query' => $data,
+                'fuzziness' => 'AUTO',
+                'fields' => ['name'],
+            ],
         ];
 
         $params = $this->getParams($query);
         $results = $this->client->search($params);
 
-       return $results['hits']['hits'][0]['_id'];
+        $resultSearch = array();
+
+        foreach ($results['hits']['hits'] as $value ){
+            array_push($resultSearch, ['id' => $value["_id"], 'name' => $value['_source']['name'], 'country' => $value['_source']['country']]);
+        }
+
+       return $resultSearch;
     }
     /**
      * @return array
