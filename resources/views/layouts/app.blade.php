@@ -10,7 +10,10 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="{{ asset('js/app.js') }}"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="{{ asset('js/jquery.easy-autocomplete.min.js') }}"></script>
+
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -18,6 +21,8 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('css/easy-autocomplete.min.css') }}">
+
 </head>
 <body>
 <div id="app">
@@ -32,8 +37,41 @@
             <form action="{{ route('search') }}" class="form-inline my-2 my-lg-0" method="post">
                 @csrf
                 <input class="form-control mr-sm-2" name="cityName" type="search" placeholder="Search"
-                       aria-label="Search" required>
+                       aria-label="Search" required id="ajax-post">
                 <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                <script>
+                    var options = {
+
+                        url: function(cityName) {
+                            return "ajaxSearch/";
+                        },
+                        getValue: "name",
+
+                         template: {
+                             type: "links",
+                             fields: {
+                                 link: "id"
+                             }
+                         },
+
+                        ajaxSettings: {
+                            dataType: "json",
+                            method: "POST",
+                            data: {
+                                dataType: "json",
+                                _token: "{{ csrf_token() }}"
+                            }
+                        },
+
+                        preparePostData: function(data) {
+                            data.cityName = $("#ajax-post").val();
+                            return data;
+                        },
+
+                        requestDelay: 400
+                    };
+                    $("#ajax-post").easyAutocomplete(options);
+                </script>
             </form>
         </div>
     </nav>

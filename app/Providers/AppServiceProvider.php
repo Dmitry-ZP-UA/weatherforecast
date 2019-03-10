@@ -8,7 +8,7 @@ use Elasticsearch\ClientBuilder;
 
 class AppServiceProvider extends ServiceProvider
 {
-    const HOST_ELASTIC = ['elasticsearch:9200'];
+    const HOST_ELASTIC = ['localhost:9200'];
 
     /**
      * Bootstrap any application services.

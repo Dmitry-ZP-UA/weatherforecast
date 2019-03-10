@@ -6,7 +6,7 @@ use Illuminate\Console\Command;
 
 class FillingElastic extends Command
 {
-    const HOST_ELASTIC = ['elasticsearch:9200'];
+    const HOST_ELASTIC = ['localhost:9200'];
 
     /**
      * The name and signature of the console command.
