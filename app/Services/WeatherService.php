@@ -9,6 +9,8 @@ class WeatherService
      */
     private $cache;
 
+
+
     /**
      * @var CitySearcher
      */
@@ -32,6 +34,7 @@ class WeatherService
     public function getForecast($cityId)
     {
         if(($cache = $this->cache->getCache($cityId))){
+            dump( ' on caching data == true ');
             return $cache;
         }
 
