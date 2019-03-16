@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\SearchRequest;
 use App\Services\CitySearcher;
+use http\Client\Response;
 
 class SearchController extends Controller
 {

@@ -8,6 +8,9 @@ Route::post('search', 'SearchController@index')->name('search');
 
 Route::get('/{cityId}', 'HomeController@show')->name('forecast');
 
+Route::post('/ajaxSearch', 'AjaxController@index')->name('ajaxPostSearchCity');
+
+
 
 
 

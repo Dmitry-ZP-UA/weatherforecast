@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Services\WeatherService;
+use Elasticsearch\ClientBuilder;
 
 class HomeController extends Controller
 {
+    const HOST_ELASTIC = ['localhost:9200'];
 
     /**
      * @param $cityId
